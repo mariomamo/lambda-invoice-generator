@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  localstack:
+    container_name: "localstack"
+    image: localstack/localstack
+    ports:
+      - "4566:4566"            # LocalStack Gateway
+      - "4510-4559:4510-4559"  # ext services port range
+      - "53:53"                # DNS config
+      - "53:53/udp"            # DNS config
+      - "443:443"              # LocalStack HTTPS Gateway
+    environment:
+      - USE_SINGLE_REGION=1
+      - DEFAULT_REGION=eu-west-1
+#      - LOCALSTACK_API_KEY=XXX
+#      - SERVICES=s3,sqs,dynamodb,lambda,cloudformation,ssm,iam,cloudwatch,sts,kinesis,events,xray,ecr
+      - DATA_DIR=/tmp/localstack/data
+      - LEGACY_PERSISTENCE=false
+      - EDGE_PORT=4566
+      - PORT_WEB_UI=8081
+      - START_WEB=1
+      - DEBUG=1
+      - LAMBDA_EXECUTOR=local
+      - HOSTNAME_EXTERNAL=localhost
+      - LOCALSTACK_HOSTNAME=localhost
+      - REQUIRE_PRO=0
+#      - DEBUG=${DEBUG-}
+#      - PERSISTENCE=${PERSISTENCE-}
+#      - LAMBDA_EXECUTOR=${LAMBDA_EXECUTOR-}
+#      - LOCALSTACK_API_KEY=${LOCALSTACK_API_KEY-}  # only required for Pro
+#      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+#      - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
