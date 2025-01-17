@@ -66,13 +66,6 @@ def return_response():
             "statusCode": 500
         }
 
-    # return {
-    #     "statusCode": 308,
-    #     "headers": {
-    #         "location": "https://mariooffertucci.altervista.org/PhotoSharing_1.0.4.jar"
-    #     }
-    # }
-
 
 if __name__ == '__main__':
     data = {
